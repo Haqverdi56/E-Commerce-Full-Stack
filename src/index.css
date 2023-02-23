@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    min-height: calc(100vh - 112px);
+    /* background-color: yellow; */
+}
+
+.products {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
