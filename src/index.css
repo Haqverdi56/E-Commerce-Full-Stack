@@ -14,11 +14,13 @@ ul {
 
 .container {
     min-height: calc(100vh - 112px);
-    /* background-color: yellow; */
+    margin-top: 2rem;
+    padding: 0 5%;
 }
 
 .products {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 1rem;
+    flex-wrap: wrap;
 }
