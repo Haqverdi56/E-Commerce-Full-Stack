@@ -17,11 +17,25 @@
         .header-section-icons {
             display: flex;
             gap: 2rem;
+            align-items: center;
+            a {
+                color: $black;
+                position: relative;
+            }
             .icons {
                 font-size: 1.2rem;
                 &:hover {
                     color: $yellowHover;
                     cursor: pointer;
+                }
+                .basket-count {
+                    position: absolute;
+                    top: 0;
+                    right: 0%;
+                    transform: translate(70%,-30%);
+                    font-size: 12px;
+                    font-weight: 500;
+                    color: red;
                 }
             }
         }
@@ -30,6 +44,8 @@
         display: flex;
         gap: 2rem;
         margin-top: 2rem;
+        overflow-x: scroll;
+        
         li {
             cursor: pointer;
             border-bottom: 3px solid transparent;
@@ -37,6 +53,15 @@
                 color: $yellowHover;
                 border-bottom: 3px solid $yellowHover;
             }
+            a {
+                text-decoration: none;
+                text-transform: capitalize;
+                display: block;
+                height: 100%;
+            }
         }
     }
+}
+.category-names-ul::-webkit-scrollbar {
+    display: none;
 }

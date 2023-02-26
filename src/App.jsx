@@ -1,35 +1,22 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
 import { Route, Routes } from "react-router-dom"
 import Header from "./components/header/Header"
-import Product from "./components/product/Product"
-import { add } from "./redux/store/features/productSlice"
 import Basket from './pages/Basket'
 import HomePage from "./components/HomePage"
+import Category from './pages/category/Category'
+import Details from "./pages/details/Details"
 
 function App() {
-  const [data, setData] = useState([])
-
-  const productFetch = async () => {
-    await axios.get('https://dummyjson.com/products')
-    .then(res => {
-      setData(res.data.products)  
-    })
-  } 
-  // console.log(data);
-
-  useEffect(() => {
-    productFetch()
-  }, [])
   
   return (
     <div className="App">
       <Header />
       <div className="container">
         <Routes>
-          <Route path="/" element={<HomePage data={data} />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/category/:name" element={<Category />} />
           <Route path="/basket" element={<Basket />} />
+          <Route path="/details/:id" element={<Details />} />
         </Routes>
       </div>
     </div>

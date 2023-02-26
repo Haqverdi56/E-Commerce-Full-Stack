@@ -1,0 +1,49 @@
+@import '../../assets/colors';
+.categories-div {
+    display: flex;
+    gap: 2rem;
+    // flex-wrap: wrap;
+    .category-card {
+        background-color: rgb(238, 238, 238);
+        border: 1px solid #E6E6E6;
+        border-radius: 8px;
+        .category-card-img {
+            width: 250px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            img {
+                width: 100%;
+                height: 100%;
+                // width: 100%;
+                // height: 100%;
+                // object-fit: contain;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+        .category-card-about{
+            padding: 10px 16px;
+            display: flex;
+            flex-direction: column;
+            .category-card-about-title{
+                width: 12rem;
+            }
+            .category-card-about-addButton {
+                background-color: $yellow;
+                border: none;
+                padding: 12px 14px;
+                transition: all 0.2s;
+                &:hover {
+                    background-color: $yellowHover;
+                    cursor: pointer;
+                }
+                &:active {
+                    color: white;
+                    background-color: $black;
+                }
+            }
+        }
+    }
+}

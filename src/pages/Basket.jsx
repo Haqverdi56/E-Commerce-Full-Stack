@@ -1,26 +1,60 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Product from '../components/product/Product'
+import './basket.scss'
+import { AiOutlineDelete } from 'react-icons/ai'
+import { deleteById } from '../redux/store/features/productSlice'
 
 function Basket() {
-  const basketProducts = useSelector(state => state.product) 
+  const [count, setCount] = useState(0)
+  const products = useSelector(state => state.product) 
+  const dispatch = useDispatch()
+  
+  const productDelete = (id) => {
+    dispatch(deleteById(id))
+  }
+  console.log(products);
+  const totalPrice = (product) => {
+    console.log(product);
+    return product.reduce((acc, cur) => acc + cur.price.price * cur.count, 0).toFixed(2);
+  }
+
+  const increase = () => {
+    setCount(prev => prev +1)
+  }
+
   return (
-    <>
-      {
-        basketProducts && basketProducts.map(product => (
-          <div className='product-card'>
-              <div className='product-card-img'>
-                  {/* <img src="https://fdn2.gsmarena.com/vv/pics/apple/apple-iphone-12-r1.jpg" alt="" /> */}
-                  <img src={product.thumbnail} alt="" />
-              </div>
-              <div className='product-card-about'>
-                  <p className='product-card-about-title'>{product.title}</p>  
-                  <p>{product.price} $</p>
-              </div>
-          </div>
-        ))
-      }
-      </>
+    <div className='basket-div'>
+      <div className='basket-product'>
+        {
+          products && products.map(product => (
+            <div key={product.id} className='basket-card'>
+                <div className='basket-card-img'>
+                    <img src={product.thumbnail} alt="" />
+                </div>
+                <div className='basket-card-about'>
+                    <p className='basket-card-about-title'>{product.title}</p>  
+                    <p className='basket-card-price'>{product.price}$</p>
+                </div>
+                <div className='basket-card-buttons'>
+                  <button className='buttonMinus'>-</button>
+                  <p className='buttonCount'>{count}</p>
+                  <button className='buttonPlus' onClick={() => increase()}>+</button>
+                </div>
+                <div className="basket-card-delete">
+                  <AiOutlineDelete onClick={() => productDelete(product.id)} />
+                </div>
+            </div>
+          ))
+        }
+      </div>
+      <div className='price-evaluation'>
+        <div className='price-evaluation-amount'>
+          <p>Məbləğ</p>
+          <span>1200$</span>
+        </div>
+      </div>
+    </div>
   )
 }
 
