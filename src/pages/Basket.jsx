@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Product from '../components/product/Product'
 import './basket.scss'
 import { AiOutlineDelete } from 'react-icons/ai'
-import { deleteById } from '../redux/store/features/productSlice'
+import { deleteById, increaseCount, decreaseCount } from '../redux/store/features/productSlice'
 
 function Basket() {
   const products = useSelector(state => state.product) 
@@ -19,13 +18,18 @@ function Basket() {
   //   return product.reduce((acc, cur) => acc + cur.price.price * cur.count, 0).toFixed(2);
   // }
 
-  // const increase = () => {
-  //   setCount(prev => prev +1)
-  // }
+  const increase = id => {
+    dispatch(increaseCount(id))
+  }
+  const decrease = id => {
+    dispatch(decreaseCount(id))
+  }
 
   return (
     <div className='basket-div'>
-      <div className='basket-product'>
+      {
+        products.length > 0 ? 
+        <div className='basket-product'>
         {
           products && products.map(product => (
             <div key={product.id} className='basket-card'>
@@ -37,9 +41,9 @@ function Basket() {
                     <p className='basket-card-price'>{product.price}$</p>
                 </div>
                 <div className='basket-card-buttons'>
-                  <button className='buttonMinus'>-</button>
+                  <button className='buttonMinus' onClick={() => decrease(product.id)}>-</button>
                   <p className='buttonCount'>{product.count}</p>
-                  <button className='buttonPlus'>+</button>
+                  <button className='buttonPlus' onClick={() => increase(product.id)}>+</button>
                 </div>
                 <div className="basket-card-delete">
                   <AiOutlineDelete onClick={() => productDelete(product.id)} />
@@ -47,7 +51,8 @@ function Basket() {
             </div>
           ))
         }
-      </div>
+      </div> : <h1>Səbət boşdur!</h1>
+      }
       <div className='price-evaluation'>
         <div className='price-evaluation-amount'>
           <p>Məbləğ</p>

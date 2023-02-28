@@ -6,7 +6,7 @@ export const productSlice = createSlice({
     name: 'products',
     initialState, 
     reducers: {
-        add: (state, {payload}) => {
+        add: (state, { payload }) => {
             const item = state.find((q) => q.id === payload.id);
 
             if (item) {
@@ -15,13 +15,28 @@ export const productSlice = createSlice({
                 state.push({...payload, count: 1});
             }
         },
-        deleteById: (state,action) => {
-            return state.filter(q => q.id != action.payload)
+        deleteById: (state, { payload }) => {
+            return state.filter(q => q.id != payload)
+        },
+        increaseCount: (state, { payload }) => {
+            const item = state.find((q) => q.id === payload);
+            console.log(current(state));
+            
+            if(item) {
+                item.count++
+            }
+        },
+        decreaseCount: (state, { payload }) => {
+            const item = state.find((q) => q.id === payload);
+            console.log(payload, item, 'zzzzz');
+            if (item.count > 1) {
+                item.count--;
+            }
         }
     }
 })
 
 
-export const { add, deleteById } = productSlice.actions
+export const { add, deleteById, increaseCount, decreaseCount } = productSlice.actions
 
 export default productSlice.reducer;
