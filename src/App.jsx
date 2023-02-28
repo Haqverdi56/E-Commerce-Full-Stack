@@ -5,6 +5,7 @@ import Basket from './pages/Basket'
 import HomePage from "./components/HomePage"
 import Category from './pages/category/Category'
 import Details from "./pages/details/Details"
+import Favorites from "./pages/Favorites/Favorites"
 
 function App() {
   
@@ -17,6 +18,7 @@ function App() {
           <Route path="/category/:name" element={<Category />} />
           <Route path="/basket" element={<Basket />} />
           <Route path="/details/:id" element={<Details />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </div>
     </div>

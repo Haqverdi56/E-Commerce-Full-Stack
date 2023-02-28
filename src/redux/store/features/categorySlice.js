@@ -9,7 +9,7 @@ export const categorySlice = createSlice({
   initialState,
   reducers: {
     sendCategoryName: (state, {payload}) => {
-        state.value = payload
+      state.value = payload
     }
   },
 })

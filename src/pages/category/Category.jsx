@@ -3,10 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './category.scss'
 import { add } from '../../redux/store/features/productSlice'
-import { useParams } from 'react-router-dom'
+import { BsHeart } from 'react-icons/bs'
+import { Link, useParams } from 'react-router-dom'
+import { BsHeartFill } from 'react-icons/bs'
+import Product from '../../components/product/Product'
 
 const Category = () => {
   const [products, setProducts] = useState([]);
+  const [heart, setHeart] = useState(true);
+  
   const dispatch = useDispatch();
   const params = useParams();
 
@@ -18,20 +23,20 @@ const Category = () => {
   const addProduct = (item) => {
     dispatch(add(item));
   }
+
+  const addFavorite = (item) => {
+    setHeart(false);
+  }
+
+  const removeFavorite = (item) => {
+    setHeart(true)
+  }
+
   return (
     <div className='categories-div'>
-      { 
+      {
         products && products.map(item => (
-        <div className='category-card' key={item.id}>
-          <div className='category-card-img'>
-              <img src={item?.thumbnail} alt="" />
-          </div>
-          <div className='category-card-about'>
-              <p className='category-card-about-title'>{item?.title}</p>  
-              <p>{item?.price} $</p>
-              <button className='category-card-about-addButton' onClick={() => addProduct(item)}>Add</button>
-          </div>
-      </div>
+          <Product key={item.id} item={item} />
         ))
       }
     </div>

@@ -11,9 +11,17 @@ const Details = () => {
   
   axios.get(`https://dummyjson.com/products/${params.id}`)
   .then(res => setDataItem(res.data))
+
   return (
-    <div>
-      <Product item={dataItem} />
+    <div className='details-card'>
+          <div className='details-card-img'>
+              <img src={dataItem?.thumbnail} alt="" />
+        </div>
+        <div className='details-card-about'>
+              <p className='details-card-about-title'>{dataItem?.title}</p>  
+            <p>{(dataItem?.price)?.toFixed(2)} $</p>
+            {/* <button className='product-card-about-addButton' onClick={() => addProduct(dataItem)}>Add</button> */}
+        </div>
     </div>
   )
 }

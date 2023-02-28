@@ -6,7 +6,6 @@ import { AiOutlineDelete } from 'react-icons/ai'
 import { deleteById } from '../redux/store/features/productSlice'
 
 function Basket() {
-  const [count, setCount] = useState(0)
   const products = useSelector(state => state.product) 
   const dispatch = useDispatch()
   
@@ -14,14 +13,15 @@ function Basket() {
     dispatch(deleteById(id))
   }
   console.log(products);
-  const totalPrice = (product) => {
-    console.log(product);
-    return product.reduce((acc, cur) => acc + cur.price.price * cur.count, 0).toFixed(2);
-  }
 
-  const increase = () => {
-    setCount(prev => prev +1)
-  }
+  // const totalPrice = (product) => {
+  //   console.log(product);
+  //   return product.reduce((acc, cur) => acc + cur.price.price * cur.count, 0).toFixed(2);
+  // }
+
+  // const increase = () => {
+  //   setCount(prev => prev +1)
+  // }
 
   return (
     <div className='basket-div'>
@@ -38,8 +38,8 @@ function Basket() {
                 </div>
                 <div className='basket-card-buttons'>
                   <button className='buttonMinus'>-</button>
-                  <p className='buttonCount'>{count}</p>
-                  <button className='buttonPlus' onClick={() => increase()}>+</button>
+                  <p className='buttonCount'>{product.count}</p>
+                  <button className='buttonPlus'>+</button>
                 </div>
                 <div className="basket-card-delete">
                   <AiOutlineDelete onClick={() => productDelete(product.id)} />
