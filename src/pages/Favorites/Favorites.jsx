@@ -2,8 +2,8 @@ import React from 'react'
 import { BsHeartFill } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import Product from '../../components/product/Product'
 import { deleteFav } from '../../redux/store/features/favoritesSlice'
+import { add } from '../../redux/store/features/productSlice'
 import './favorites.scss'
 
 const Favorites = () => {
@@ -16,6 +16,7 @@ const Favorites = () => {
   return (
     <div className='favorite-div'>
       {
+        favProducts.length > 0 ? 
         favProducts && favProducts.map(favorite => (
           <div className='product-card' key={favorite.id}>
               <div className='product-card-img'>
@@ -27,10 +28,10 @@ const Favorites = () => {
               <div className='product-card-about'>
                   <p className='product-card-about-title'>{favorite?.title}</p>  
                   <p>{(favorite?.price)?.toFixed(2)} $</p>
-                  <button className='product-card-about-addButton' onClick={() => addProduct(favorite)}>Add</button>
+                  <button className='product-card-about-addButton' onClick={() => dispatch(add(favorite))}>Add</button>
               </div>
           </div>
-        ))
+        )) : <h1>Favorits-lər boşdur</h1>
       }
     </div>
   )

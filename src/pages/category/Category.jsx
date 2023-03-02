@@ -7,6 +7,7 @@ import { BsHeart } from 'react-icons/bs'
 import { Link, useParams } from 'react-router-dom'
 import { BsHeartFill } from 'react-icons/bs'
 import Product from '../../components/product/Product'
+import { Breadcrumbs } from '@mui/material'
 
 const Category = () => {
   const [products, setProducts] = useState([]);
@@ -20,17 +21,17 @@ const Category = () => {
       .then(res => setProducts(res.data.products))
   }, [params.name])
 
-  const addProduct = (item) => {
-    dispatch(add(item));
-  }
+  // const addProduct = (item) => {
+  //   dispatch(add(item));
+  // }
 
-  const addFavorite = (item) => {
-    setHeart(false);
-  }
+  // const addFavorite = (item) => {
+  //   setHeart(false);
+  // }
 
-  const removeFavorite = (item) => {
-    setHeart(true)
-  }
+  // const removeFavorite = (item) => {
+  //   setHeart(true)
+  // }
 
   return (
     <div className='categories-div'>

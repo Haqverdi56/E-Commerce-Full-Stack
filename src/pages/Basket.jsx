@@ -11,12 +11,10 @@ function Basket() {
   const productDelete = (id) => {
     dispatch(deleteById(id))
   }
-  console.log(products);
 
-  // const totalPrice = (product) => {
-  //   console.log(product);
-  //   return product.reduce((acc, cur) => acc + cur.price.price * cur.count, 0).toFixed(2);
-  // }
+  const totalPrice = (product) => {
+    return product.reduce((acc, cur) => acc + cur.price * cur.count, 0).toFixed(2);
+  }
 
   const increase = id => {
     dispatch(increaseCount(id))
@@ -56,7 +54,7 @@ function Basket() {
       <div className='price-evaluation'>
         <div className='price-evaluation-amount'>
           <p>Məbləğ</p>
-          <span>1200$</span>
+          <span>{totalPrice(products)}</span>
         </div>
       </div>
     </div>
