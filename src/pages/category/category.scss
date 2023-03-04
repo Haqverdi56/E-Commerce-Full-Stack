@@ -1,56 +1,78 @@
 @import '../../assets/colors';
-.categories-div {
+
+.category-container {
     display: flex;
-    gap: 2rem;
-    // flex-wrap: wrap;
-    .category-card {
-        background-color: rgb(238, 238, 238);
-        border: 1px solid #E6E6E6;
-        border-radius: 8px;
-        .category-card-img {
-            width: 250px;
-            height: 200px;
-            display: flex;
-            justify-content: center;
-            position: relative;
-            img {
-                width: 100%;
-                height: 100%;
-                // width: 100%;
-                // height: 100%;
-                // object-fit: contain;
-                &:hover {
-                    cursor: pointer;
-                }
+    justify-content: space-between;
+    .filter-section {
+        width: 25%;
+        .priceSortButton {
+            padding: 0.8rem 1rem;
+            background-color: $yellow;
+            border: none;
+            border-radius: 5px;
+            &:hover {
+                background-color: $yellowHover;
             }
-            .heart-icon {
-                position: absolute;
-                color: $yellow;
-                cursor: pointer;
-                font-size: 1.6rem;
-                right: 10px;
-                top: 10px;
+            &:active {
+                background-color: $black;
+                color: white;
             }
         }
-        .category-card-about{
-            padding: 10px 16px;
-            display: flex;
-            flex-direction: column;
-            .category-card-about-title{
-                width: 12rem;
-            }
-            .category-card-about-addButton {
-                background-color: $yellow;
-                border: none;
-                padding: 12px 14px;
-                transition: all 0.2s;
-                &:hover {
-                    background-color: $yellowHover;
-                    cursor: pointer;
+    }
+    .categories-div {
+        display: flex;
+        gap: 2rem;
+        width: 75%;
+        flex-wrap: wrap;
+        .category-card {
+            background-color: rgb(238, 238, 238);
+            border: 1px solid #E6E6E6;
+            border-radius: 8px;
+            .category-card-img {
+                width: 250px;
+                height: 200px;
+                display: flex;
+                justify-content: center;
+                position: relative;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    // width: 100%;
+                    // height: 100%;
+                    // object-fit: contain;
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
-                &:active {
-                    color: white;
-                    background-color: $black;
+                .heart-icon {
+                    position: absolute;
+                    color: $yellow;
+                    cursor: pointer;
+                    font-size: 1.6rem;
+                    right: 10px;
+                    top: 10px;
+                }
+            }
+            .category-card-about{
+                padding: 10px 16px;
+                display: flex;
+                flex-direction: column;
+                .category-card-about-title{
+                    width: 12rem;
+                }
+                .category-card-about-addButton {
+                    background-color: $yellow;
+                    border: none;
+                    padding: 12px 14px;
+                    transition: all 0.2s;
+                    &:hover {
+                        background-color: $yellowHover;
+                        cursor: pointer;
+                    }
+                    &:active {
+                        color: white;
+                        background-color: $black;
+                    }
                 }
             }
         }

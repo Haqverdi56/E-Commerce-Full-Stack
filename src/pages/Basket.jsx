@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import './basket.scss'
+import { useDispatch, useSelector } from 'react-redux'
 import { AiOutlineDelete } from 'react-icons/ai'
-import { deleteById, increaseCount, decreaseCount } from '../redux/store/features/productSlice'
+import { deleteById, increaseCount, decreaseCount } from '../redux/store/features/basketSlice'
 
 function Basket() {
   const products = useSelector(state => state.product) 

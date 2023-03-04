@@ -6,6 +6,7 @@ import Category from './pages/category/Category'
 import Details from "./pages/details/Details"
 import Favorites from "./pages/Favorites/Favorites"
 import ErrorPage from "./pages/ErrorPage"
+import LoginPage from "./pages/loginpage/LoginPage"
 
 function App() {
   
@@ -15,11 +16,11 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          {/* <Route path="/categories" element={<Category />} /> */}
           <Route path="/category/:name" element={<Category />} />
           <Route path="/basket" element={<Basket />} />
           <Route path="/details/:id" element={<Details />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<ErrorPage/>} />
         </Routes>
       </div>

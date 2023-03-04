@@ -3,7 +3,7 @@ import { BsHeartFill } from 'react-icons/bs'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { deleteFav } from '../../redux/store/features/favoritesSlice'
-import { add } from '../../redux/store/features/productSlice'
+import { add } from '../../redux/store/features/basketSlice'
 import './favorites.scss'
 
 const Favorites = () => {

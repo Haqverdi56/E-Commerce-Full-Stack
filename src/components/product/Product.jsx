@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import './product.scss'
-import { add } from '../../redux/store/features/productSlice';
+import { add } from '../../redux/store/features/basketSlice';
 import { addFav } from '../../redux/store/features/favoritesSlice'
 import { Link } from 'react-router-dom';
 import { BsHeart } from 'react-icons/bs'
 import { BsHeartFill } from 'react-icons/bs'
 
 function Product(props) {
-  const [heart, setHeart] = useState(true)
-  const dispatch = useDispatch()
+  const [heart, setHeart] = useState(true);
+  const dispatch = useDispatch();
 
   const addProduct = (item) => {
     dispatch(add(item));
@@ -18,11 +18,11 @@ function Product(props) {
   const addFavorite = (itemFav) => {
     setHeart(false);
     dispatch(addFav(itemFav))
-  }
+  };
 
   const removeFavorite = (item) => {
     setHeart(true)
-  }
+  };
 
   return (
     <div className='product-card'>

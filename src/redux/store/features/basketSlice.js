@@ -20,7 +20,6 @@ export const productSlice = createSlice({
         },
         increaseCount: (state, { payload }) => {
             const item = state.find((q) => q.id === payload);
-            console.log(current(state));
             
             if(item) {
                 item.count++
@@ -28,7 +27,6 @@ export const productSlice = createSlice({
         },
         decreaseCount: (state, {payload}) => {
             const item = state.find((q) => q.id === payload);
-            console.log(payload, item, 'zzzzz');
             if (item.count > 1) {
                 item.count--;
             }

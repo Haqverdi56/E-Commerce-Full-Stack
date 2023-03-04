@@ -40,30 +40,42 @@
             }
         }
     }
-    .category-names-ul {
-        display: flex;
-        gap: 2rem;
-        margin-top: 2rem;
-        overflow-x: scroll;
-        li {
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            a {
-                text-decoration: none;
-                text-transform: capitalize;
-                color: $black;
-                display: block;
-                height: 100%;
+    .category-names {
+        position: relative;
+        .category-names-ul {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            overflow-x: scroll;
+            li {
+                cursor: pointer;
                 border-bottom: 3px solid transparent;
-                &:hover {
-                    color: $yellowHover;
+                a {
+                    text-decoration: none;
+                    text-transform: capitalize;
+                    color: $black;
+                    display: block;
+                    height: 100%;
+                    border-bottom: 3px solid transparent;
+                    &:hover {
+                        color: $yellowHover;
+                        border-bottom: 3px solid $yellowHover;
+                    }
+                }
+                .activeLink {
+                    color: $yellow;
                     border-bottom: 3px solid $yellowHover;
                 }
             }
-            .activeLink {
-                color: $yellow;
-                border-bottom: 3px solid $yellowHover;
-            }
+        }
+        .mega-menu {
+            z-index: 999;
+            position: absolute;
+            background-color: white;
+            width: 100%;
+            display: flex;
+            gap: 1rem;
+            padding: 2rem;
         }
     }
 }
