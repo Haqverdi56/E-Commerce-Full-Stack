@@ -38,25 +38,38 @@ function Basket() {
                     <p className='basket-card-about-title'>{product.title}</p>  
                     <p className='basket-card-price'>{product.price}$</p>
                 </div>
-                <div className='basket-card-buttons'>
-                  <button className='buttonMinus' onClick={() => decrease(product.id)}>-</button>
-                  <p className='buttonCount'>{product.count}</p>
-                  <button className='buttonPlus' onClick={() => increase(product.id)}>+</button>
-                </div>
-                <div className="basket-card-delete">
-                  <AiOutlineDelete onClick={() => productDelete(product.id)} />
+                <div className='basket-card-buttons-div'>
+                  <div className='basket-card-buttons'>
+                    <button className='buttonMinus' onClick={() => decrease(product.id)}>-</button>
+                    <p className='buttonCount'>{product.count}</p>
+                    <button className='buttonPlus' onClick={() => increase(product.id)}>+</button>
+                  </div>
+                  <div className="basket-card-delete">
+                    <AiOutlineDelete onClick={() => productDelete(product.id)} />
+                  </div>
                 </div>
             </div>
           ))
         }
       </div> : <h1>Səbət boşdur!</h1>
       }
-      <div className='price-evaluation'>
-        <div className='price-evaluation-amount'>
-          <p>Məbləğ</p>
-          <span>{totalPrice(products)}</span>
-        </div>
-      </div>
+      {
+        products.length > 0 ?
+        <div className='price-evaluation'>
+          <div className='price-evaluation-amount'>
+            <p>Çatdırılma</p>
+            <span>0</span>
+          </div>
+          <div className='price-evaluation-amount'>
+            <p>Promo</p>
+            <span>0</span>
+          </div>
+          <div className='price-evaluation-amount'>
+            <p>Məbləğ</p>
+            <span>{totalPrice(products)}</span>
+          </div>
+        </div> : null
+      }
     </div>
   )
 }

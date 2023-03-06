@@ -42,6 +42,7 @@
     }
     .category-names {
         position: relative;
+        transition: 1000s;
         .category-names-ul {
             display: flex;
             gap: 2rem;
@@ -71,11 +72,21 @@
         .mega-menu {
             z-index: 999;
             position: absolute;
-            background-color: white;
+            background-color: $yellow;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
             width: 100%;
             display: flex;
             gap: 1rem;
             padding: 2rem;
+            transition-duration: 0.3s;
+            transition-timing-function: ease-in-out;
+            .mega-menu li {
+                /* diğer stiller */
+                transition-duration: 0.2s;
+                transition-timing-function: ease-in-out;
+            }
+            
         }
     }
 }

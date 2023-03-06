@@ -1,39 +1,72 @@
 import React, { useEffect, useState } from 'react'
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import { FiChevronDown } from 'react-icons/fi';
-import './style.css'
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import ListItemText from '@mui/material/ListItemText';
+import Select from '@mui/material/Select';
+import Checkbox from '@mui/material/Checkbox';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
-function AccordionCategory({categoryName, handleCategoryChange }) {
+function AccordionCategory({selectedCategories,setSelectedCategories }) {
+  const [categoryName, setCategoryName] = useState([]);
+  const params = useParams()
+  
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSelectedCategories(
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+  
+
+  // Accordion
+  useEffect(() => {
+    setSelectedCategories([params.name])
+    console.log(selectedCategories); 
+    axios.get('https://dummyjson.com/products/categories')
+    .then(res => setCategoryName(res.data))
+  }, [params.name]);
+
+  // console.log(selectedCategories)
 
   return (
-    <div>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<FiChevronDown />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-          >
-          <Typography><b>Brend</b></Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          {
-            categoryName && categoryName.map((category, i) => (
-              <Typography component={'span'} key={i}>
-                <div className='acc-category-name'>
-                  <label className='acc-category-name-label'>
-                    <input value={category} className='acc-category-name-checkbox' type="checkbox" onChange={handleCategoryChange}/>
-                    {category}
-                  </label>
-                </div>
-              </Typography>
-            ))
-          }
-        </AccordionDetails>
-      </Accordion>
-    </div>
+      <FormControl sx={{ minWidth: 160, maxWidth: '100%'}}>
+        <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+        <Select
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={selectedCategories}
+          onChange={handleChange}  
+          input={<OutlinedInput label="Tag" />}
+          renderValue={(selected) => selected.join(', ')}
+          MenuProps={MenuProps}
+        >
+        {
+          categoryName && categoryName.map((category, i) => (
+            <MenuItem key={i} value={category} >
+              <Checkbox checked={selectedCategories.indexOf(category) > -1} value={category} className='acc-category-name-checkbox' type="checkbox"/>
+              <ListItemText primary={category} />
+            </MenuItem>  
+          ))
+        }
+        </Select>
+      </FormControl>
   )
 }
 

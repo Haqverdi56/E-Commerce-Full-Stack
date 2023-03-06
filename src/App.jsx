@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import Header from "./components/header/Header"
 import Basket from './pages/Basket'
-import HomePage from "./components/HomePage"
+import HomePage from "./pages/homepage/HomePage"
 import Category from './pages/category/Category'
 import Details from "./pages/details/Details"
 import Favorites from "./pages/Favorites/Favorites"

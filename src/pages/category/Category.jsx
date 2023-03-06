@@ -1,23 +1,18 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import './category.scss'
+import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { Breadcrumbs } from '@mui/material'
 import Product from '../../components/product/Product'
 import AccordionCategory from '../../components/AccordionCategory'
+import Filter from './Filter'
 
 const Category = () => {
   const [products, setProducts] = useState([]);
-  const [heart, setHeart] = useState(true);
-  const dispatch = useDispatch();
   const params = useParams();
-  // Accordion
-  const [categoryName, setCategoryName] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = React.useState([]);
   
   const fetchProducts = async () => {
-    await axios.get(`https://dummyjson.com/products/category/${params.name}`)
+    await axios.get(`https://dummyjson.com/products?limit=90`)
     .then(res => setProducts(res.data.products))
   }
   useEffect(() => {
@@ -25,11 +20,6 @@ const Category = () => {
   }, [params.name]);
 
   
-  // Accordion
-  useEffect(() => {
-    axios.get('https://dummyjson.com/products/categories')
-    .then(res => setCategoryName(res.data))
-  }, []);
 
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
@@ -38,6 +28,7 @@ const Category = () => {
     } else {
       setSelectedCategories(selectedCategories.filter((category) => category !== value));
     }
+    console.log(e.target)
   };
   
   const priceSortExpensive = () => {
@@ -52,23 +43,23 @@ const Category = () => {
    products.filter((product) => selectedCategories.includes(product.category)) 
    : products;
 
-  console.log(filteredProducts);
+  // console.log(filteredProducts);
   return (
     <div className='category-container'>
       <div className='filter-section'>
         <AccordionCategory 
-        categoryName={categoryName}
+        selectedCategories={selectedCategories}
+        setSelectedCategories={setSelectedCategories}
         handleCategoryChange={handleCategoryChange}
         />
-        <button onClick={priceSortExpensive} className='priceSortButton'>Ən bahadan ucuza</button>
-        <button onClick={priceSortCheap} className='priceSortButton'>Ən ucuzdan bahaya</button>
+        <Filter priceSortCheap={priceSortCheap} priceSortExpensive={priceSortExpensive} />
       </div>
       <div className='categories-div'>
-        {
-          products && products.map(item => (
-            <Product key={item.id} item={item} />
-          ))
-        }
+          {
+            filteredProducts && filteredProducts.map(item => (
+              <Product key={item.id} item={item} />
+            ))
+          }
       </div>
     </div>
   )

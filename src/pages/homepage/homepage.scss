@@ -1,0 +1,11 @@
+.homepage {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    .products {
+        .products-slide-title {
+            font-size: 2rem;
+            font-weight: 500;
+        }
+    }
+}

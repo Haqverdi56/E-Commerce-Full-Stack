@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Brendyol from '../../assets/images/brendyol.png'
 import './header.scss'
 import { VscAccount } from 'react-icons/vsc'
@@ -14,6 +14,7 @@ function Header() {
   const [categoryName, setCategoryName] = useState([]);
   const [showMegaMenu, setShowMegaMenu] = useState(false);
   const products = useSelector(state => state.product);
+  const timerRef = useRef();
   
   useEffect(() => {
     axios.get('https://dummyjson.com/products/categories')
@@ -22,13 +23,14 @@ function Header() {
 
 
   function handleMouseEnter() {
-    setShowMegaMenu(true);
-    console.log('enter');
+    timerRef.current = setTimeout(() => {
+      setShowMegaMenu(true);
+    }, 500);
   }
   
   function handleMouseLeave() {
-    setShowMegaMenu(false);
-    console.log('exit');
+    clearTimeout(timerRef.current);
+    setShowMegaMenu(false)
   }
   
   const activeLink = 'activeLink'

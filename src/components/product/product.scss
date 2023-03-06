@@ -4,7 +4,10 @@
     background-color: rgb(238, 238, 238);
     border: 1px solid #E6E6E6;
     border-radius: 8px;
+    font-size: 1rem;
     display: flex;
+    min-height: 330px;
+    max-height: 360px;
     flex-direction: column;
     justify-content: space-between;
     .product-card-img {
@@ -50,6 +53,44 @@
             &:active {
                 color: white;
                 background-color: $black;
+            }
+        }
+    }
+}
+
+
+@media only screen and (min-width: 350px) and (max-width: 768px){
+    .product-card {
+        display: flex;
+        font-size: 14px;
+        min-height: 240px;
+        max-height: 280px;
+        font-size: 12px;
+        .product-card-img {
+            width: 160px;
+            height: 130px;
+        }
+        .product-card-about {
+            padding: 8px 8px;
+            // display: flex;
+            // flex-direction: column;
+            // // align-items: center;
+            .product-card-about-title {
+                width: 9rem;
+            }
+            .product-card-about-addButton {
+                // background-color: $yellow;
+                // border: none;
+                // padding: 12px 14px;
+                // transition: all 0.2s;
+                &:hover {
+                    // background-color: $yellowHover;
+                    // cursor: pointer;
+                }
+                &:active {
+                    // color: white;
+                    // background-color: $black;
+                }
             }
         }
     }
