@@ -5,15 +5,20 @@ import { useParams } from 'react-router-dom'
 import Product from '../../components/product/Product'
 import AccordionCategory from '../../components/AccordionCategory'
 import Filter from './Filter'
+import SkeletonLoader from '../../components/Skeleton'
 
 const Category = () => {
   const [products, setProducts] = useState([]);
-  const params = useParams();
   const [selectedCategories, setSelectedCategories] = React.useState([]);
+  const [skeleton, setSkeleton] = useState(true)
+  const params = useParams();
   
   const fetchProducts = async () => {
     await axios.get(`https://dummyjson.com/products?limit=90`)
-    .then(res => setProducts(res.data.products))
+    .then(res => {
+      setProducts(res.data.products)
+      setSkeleton(false)
+    })
   }
   useEffect(() => {
     fetchProducts()
@@ -28,22 +33,13 @@ const Category = () => {
     } else {
       setSelectedCategories(selectedCategories.filter((category) => category !== value));
     }
-    console.log(e.target)
   };
   
-  const priceSortExpensive = () => {
-    const sortPrice = [...products].sort((a,b) => b.price - a.price)
-    setProducts(sortPrice);
-  } 
-  const priceSortCheap = () => {
-    const sortPrice = [...products].sort((a,b) => a.price - b.price)
-    setProducts(sortPrice);
-  } 
   const filteredProducts = selectedCategories.length > 0 ?
    products.filter((product) => selectedCategories.includes(product.category)) 
    : products;
 
-  // console.log(filteredProducts);
+  console.log(filteredProducts);
   return (
     <div className='category-container'>
       <div className='filter-section'>
@@ -52,13 +48,13 @@ const Category = () => {
         setSelectedCategories={setSelectedCategories}
         handleCategoryChange={handleCategoryChange}
         />
-        <Filter priceSortCheap={priceSortCheap} priceSortExpensive={priceSortExpensive} />
+        <Filter  setProducts={setProducts} products={products}/>
       </div>
       <div className='categories-div'>
           {
-            filteredProducts && filteredProducts.map(item => (
+            !skeleton ? filteredProducts.map(item => (
               <Product key={item.id} item={item} />
-            ))
+            )) : <SkeletonLoader />
           }
       </div>
     </div>

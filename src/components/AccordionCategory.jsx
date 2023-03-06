@@ -37,7 +37,6 @@ function AccordionCategory({selectedCategories,setSelectedCategories }) {
   // Accordion
   useEffect(() => {
     setSelectedCategories([params.name])
-    console.log(selectedCategories); 
     axios.get('https://dummyjson.com/products/categories')
     .then(res => setCategoryName(res.data))
   }, [params.name]);
