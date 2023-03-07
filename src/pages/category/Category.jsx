@@ -6,17 +6,19 @@ import Product from '../../components/product/Product'
 import AccordionCategory from '../../components/AccordionCategory'
 import Filter from './Filter'
 import SkeletonLoader from '../../components/Skeleton'
+import { Pagination } from '@mui/material'
 
 const Category = () => {
   const [products, setProducts] = useState([]);
   const [selectedCategories, setSelectedCategories] = React.useState([]);
   const [skeleton, setSkeleton] = useState(true)
+  // const [page, setPage] = useState(1)
   const params = useParams();
   
   const fetchProducts = async () => {
-    await axios.get(`https://dummyjson.com/products?limit=90`)
+    await axios.get(`http://localhost:5000/api/products?limit=90`)
     .then(res => {
-      setProducts(res.data.products)
+      setProducts(res.data)
       setSkeleton(false)
     })
   }
@@ -36,11 +38,14 @@ const Category = () => {
   };
   
   const filteredProducts = selectedCategories.length > 0 ?
-   products.filter((product) => selectedCategories.includes(product.category)) 
+   products.filter((product) => selectedCategories.includes(product.category[0].name)) 
    : products;
 
-  console.log(filteredProducts);
+  const changePagination = (e) => {
+    console.log(e.target.textContent)
+  }
   return (
+    <>
     <div className='category-container'>
       <div className='filter-section'>
         <AccordionCategory 
@@ -53,11 +58,13 @@ const Category = () => {
       <div className='categories-div'>
           {
             !skeleton ? filteredProducts.map(item => (
-              <Product key={item.id} item={item} />
-            )) : <SkeletonLoader />
-          }
+              <Product key={item._id} item={item} />
+              )) : <SkeletonLoader />
+            }
       </div>
     </div>
+      {/* <Pagination onChange={changePagination} count={filteredProducts.length} variant="outlined" /> */}
+    </>
   )
 }
 

@@ -7,7 +7,7 @@ export const productSlice = createSlice({
     initialState, 
     reducers: {
         add: (state, {payload}) => {
-            const item = state.find((q) => q.id === payload.id);
+            const item = state.find((q) => q._id === payload._id);
 
             if (item) {
                 item.count++;
@@ -16,17 +16,17 @@ export const productSlice = createSlice({
             }
         },
         deleteById: (state, {payload}) => {
-            return state.filter(q => q.id != payload)
+            return state.filter(q => q._id != payload)
         },
         increaseCount: (state, { payload }) => {
-            const item = state.find((q) => q.id === payload);
+            const item = state.find((q) => q._id === payload);
             
             if(item) {
                 item.count++
             }
         },
         decreaseCount: (state, {payload}) => {
-            const item = state.find((q) => q.id === payload);
+            const item = state.find((q) => q._id === payload);
             if (item.count > 1) {
                 item.count--;
             }

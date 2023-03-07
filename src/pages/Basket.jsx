@@ -30,7 +30,7 @@ function Basket() {
         <div className='basket-product'>
         {
           products && products.map(product => (
-            <div key={product.id} className='basket-card'>
+            <div key={product._id} className='basket-card'>
                 <div className='basket-card-img'>
                     <img src={product.thumbnail} alt="" />
                 </div>
@@ -40,12 +40,12 @@ function Basket() {
                 </div>
                 <div className='basket-card-buttons-div'>
                   <div className='basket-card-buttons'>
-                    <button className='buttonMinus' onClick={() => decrease(product.id)}>-</button>
+                    <button className='buttonMinus' onClick={() => decrease(product._id)}>-</button>
                     <p className='buttonCount'>{product.count}</p>
-                    <button className='buttonPlus' onClick={() => increase(product.id)}>+</button>
+                    <button className='buttonPlus' onClick={() => increase(product._id)}>+</button>
                   </div>
                   <div className="basket-card-delete">
-                    <AiOutlineDelete onClick={() => productDelete(product.id)} />
+                    <AiOutlineDelete onClick={() => productDelete(product._id)} />
                   </div>
                 </div>
             </div>

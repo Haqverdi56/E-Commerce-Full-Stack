@@ -14,16 +14,16 @@ function HomePage() {
   const [skeleton, setSkeleton] = useState(true)
 
   const productFetch = async () => {
-    await axios.get('https://dummyjson.com/products?limit=10')
+    await axios.get('http://localhost:5000/api/products?limit=10')
     .then(res => {
-      setData(res.data.products)  
+      setData(res.data);
       setSkeleton(false)
     })
   }
   const laptopFetch = async () => {
-    await axios.get('https://dummyjson.com/products?limit=10&skip=5')
+    await axios.get('http://localhost:5000/api/products?limit=10&skip=10')
     .then(res => {
-      setLaptops(res.data.products)  
+      setLaptops(res.data)  
       setSkeleton(false)
     })
   }

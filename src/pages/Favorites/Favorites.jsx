@@ -18,11 +18,11 @@ const Favorites = () => {
       {
         favProducts.length > 0 ? 
         favProducts && favProducts.map(favorite => (
-          <div className='product-card' key={favorite.id}>
+          <div className='product-card' key={favorite._id}>
               <div className='product-card-img'>
                   <Link to={`/details/${favorite.id}`}><img src={favorite?.thumbnail} alt="" /></Link>
                   {
-                     <BsHeartFill className='heart-icon' onClick={() => deleteFavorite(favorite.id)} />
+                     <BsHeartFill className='heart-icon' onClick={() => deleteFavorite(favorite._id)} />
                   }
               </div>
               <div className='product-card-about'>

@@ -7,6 +7,7 @@ import Details from "./pages/details/Details"
 import Favorites from "./pages/Favorites/Favorites"
 import ErrorPage from "./pages/ErrorPage"
 import LoginPage from "./pages/loginpage/LoginPage"
+import Signup from "./pages/signup/Signup"
 
 function App() {
   
@@ -21,6 +22,7 @@ function App() {
           <Route path="/details/:id" element={<Details />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<ErrorPage/>} />
         </Routes>
       </div>

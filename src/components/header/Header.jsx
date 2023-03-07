@@ -8,6 +8,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import MegaMenu from './MegaMenu'
+import Account from './Account'
 
 
 function Header() {
@@ -17,7 +18,7 @@ function Header() {
   const timerRef = useRef();
   
   useEffect(() => {
-    axios.get('https://dummyjson.com/products/categories')
+    axios.get('http://localhost:5000/api/categories')
     .then(res => setCategoryName(res.data))
   }, []);
 
@@ -41,7 +42,7 @@ function Header() {
                 <Link to='/'><img className='header-section-logo-img' src={Brendyol} alt="" /></Link>
             </div>
             <div className='header-section-icons'>
-                <Link className='icons' to='login'><VscAccount/></Link>
+                <Account />
                 <Link className='icons' to='favorites'><TfiHeart/></Link>
                 <Link className='icons' to='basket'>
                   <BsBasket/>
@@ -57,8 +58,8 @@ function Header() {
             {
               categoryName && categoryName.map((category, i) => (
                 <li key={i}>
-                  <NavLink to={`category/${category}`} className={({isActive}) => (isActive ? activeLink : "") }>
-                    {category}
+                  <NavLink to={`category/${category.name}`} className={({isActive}) => (isActive ? activeLink : "") }>
+                    {category.name}
                   </NavLink>
                 </li>
               ))

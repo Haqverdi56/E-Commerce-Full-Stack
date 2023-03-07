@@ -37,10 +37,10 @@ function AccordionCategory({selectedCategories,setSelectedCategories }) {
   // Accordion
   useEffect(() => {
     setSelectedCategories([params.name])
-    axios.get('https://dummyjson.com/products/categories')
+    axios.get('http://localhost:5000/api/categories')
     .then(res => setCategoryName(res.data))
   }, [params.name]);
-
+  
   // console.log(selectedCategories)
 
   return (
@@ -58,9 +58,9 @@ function AccordionCategory({selectedCategories,setSelectedCategories }) {
         >
         {
           categoryName && categoryName.map((category, i) => (
-            <MenuItem key={i} value={category} >
-              <Checkbox checked={selectedCategories.indexOf(category) > -1} value={category} className='acc-category-name-checkbox' type="checkbox"/>
-              <ListItemText primary={category} />
+            <MenuItem key={i} value={category.name} >
+              <Checkbox checked={selectedCategories.indexOf(category.name) > -1} value={category.name} className='acc-category-name-checkbox' type="checkbox"/>
+              <ListItemText primary={category.name} />
             </MenuItem>  
           ))
         }

@@ -3,7 +3,7 @@
 .product-card {
     background-color: rgb(238, 238, 238);
     border: 1px solid #E6E6E6;
-    border-radius: 8px;
+    border-radius: 5px;
     font-size: 1rem;
     display: flex;
     min-height: 330px;
@@ -37,15 +37,22 @@
         padding: 10px 16px;
         display: flex;
         flex-direction: column;
-        // align-items: center;
         .product-card-about-title {
             width: 12rem;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
         .product-card-about-addButton {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            justify-content: center;
+            gap: 10px;
+            border-radius: 5px;
             background-color: $yellow;
             border: none;
             padding: 12px 14px;
-            transition: all 0.2s;
             &:hover {
                 background-color: $yellowHover;
                 cursor: pointer;
@@ -79,10 +86,8 @@
                 width: 9rem;
             }
             .product-card-about-addButton {
-                // background-color: $yellow;
-                // border: none;
-                // padding: 12px 14px;
-                // transition: all 0.2s;
+                font-size: 14px;
+                padding: 8px 10px;
                 &:hover {
                     // background-color: $yellowHover;
                     // cursor: pointer;

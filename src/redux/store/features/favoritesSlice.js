@@ -7,7 +7,7 @@ export const favoriteSlice = createSlice({
     initialState, 
     reducers: {
         addFav: (state, {payload}) => {
-            const item = state.find((q) => q.id === payload.id);
+            const item = state.find((q) => q._id === payload._id);
 
             if (item) {
                 return state               
@@ -16,7 +16,7 @@ export const favoriteSlice = createSlice({
             }
         },
         deleteFav: (state,action) => {
-            return state.filter(q => q.id != action.payload)
+            return state.filter(q => q._id != action.payload)
         }
     }
 })

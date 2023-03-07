@@ -6,14 +6,17 @@ import SwiperCarousel from '../../components/carousels/SwiperCarousel'
 import { add } from '../../redux/store/features/basketSlice'
 import { useDispatch } from 'react-redux'
 import { FiShoppingCart } from 'react-icons/fi'
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 
 const Details = () => {
   const [dataItem, setDataItem] = useState({});
+  const [value, setValue] = React.useState(2);
   const params = useParams();
   const dispatch = useDispatch()
   
   useEffect(() => {
-    axios.get(`https://dummyjson.com/products/${params.id}`)
+    axios.get(`http://localhost:5000/api/products/${params.id}`)
     .then(res => setDataItem(res.data))
   }, [])
   console.log(dataItem);
@@ -32,6 +35,13 @@ const Details = () => {
               <div>
                 <h4 className='details-card-about-title'>{dataItem?.title}</h4>  
                 <p className='details-card-about-price'>{(dataItem?.price)?.toFixed(2)} $</p>
+                <Rating
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                />
               </div>
               <div>
                 <button className='details-card-about-addButton' onClick={() => addProduct(dataItem)}>
@@ -42,7 +52,7 @@ const Details = () => {
           </div>
       </div>
       <div className='details-product-about'>
-        <p>Comments</p>
+        <h3>Comments</h3>
       </div>
     </div>
   )
