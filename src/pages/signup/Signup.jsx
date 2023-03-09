@@ -1,26 +1,48 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import './signup.scss'
 
 function Signup() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = () => {
-    if (email && password) {
-      
-    } 
+  const [data, setData] = useState({
+    email: '',
+    password: ''
+  });
+  const navigate = useNavigate();
+  
+  const handleLogin = (e) => {
+    e.preventDefault();
+    axios.post(`http://localhost:5000/api/users/login`, data)
+    .then(response => console.log(response));
+    navigate("/login")
   }
+
+  const handleChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setData({
+      ...data,
+      [name]: value
+    })
+  }
+
   return (
-    <div>
-      <h1>Sign up</h1>
-      <div>
-        <label htmlFor="email">E-mail Address:</label>
-        <input type="text" id="email" value={email} onChange={e => setEmail(e.target.value)} />
+    <div className='signup-container'>
+      <div className='signup-container-inner'>
+        <h3>Sign up</h3>
+        <form onSubmit={handleLogin} className='form'>
+          <div className='form-div'>
+            <label htmlFor="email">E-mail Address:</label>
+            <input type="text" name="email" value={data.email} onChange={(e) => handleChange(e)} />
+          </div>
+          <div className='form-div'>
+            <label htmlFor="password">Password:</label>
+            <input type="password" name="password" value={data.password} onChange={(e) => handleChange(e)} />
+          </div>
+          <button type='submit' disabled={!data.email || !data.password ? true : false}>Registr</button>
+        </form>
       </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} />
-      </div>
-      <button onClick={handleLogin}>Registr</button>
     </div>
   )
 }

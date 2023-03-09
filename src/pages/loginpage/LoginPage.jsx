@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [data, setData] = useState({
+    email: '',
+    password: ''
+  });
 
-  const handleLogin = () => {
-    if (email && password) {
-      // Burada onay kodu doğrulama işlemlerini gerçekleştirebiliriz.
-      // Örneğin, bir API çağrısı yaparak sunucu tarafında doğrulama işlemi yapabiliriz.
-      // Eğer doğrulama başarılıysa, kullanıcıyı ana sayfaya yönlendirebiliriz.
-      console.log("Giriş yapıldı!");
-    } 
+  const handleLogin = (e) => {
+    e.preventDefault();
+  }
+
+  const handleChange = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+
+    setData({
+      ...data,
+      [name]: value
+    })
   }
 
   return (
@@ -18,11 +25,11 @@ function LoginPage() {
       <h1>Login Page</h1>
       <div>
         <label htmlFor="email">E-mail Address:</label>
-        <input type="text" id="email" value={email} onChange={e => setEmail(e.target.value)} />
+        <input type="text" name="email" value={data.email} onChange={(e) => handleChange(e)} />
       </div>
       <div>
         <label htmlFor="password">Password:</label>
-        <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} />
+        <input type="password" name="password" value={data.password} onChange={(e) => handleChange(e)} />
       </div>
       <button onClick={handleLogin}>Sign in</button>
     </div>
