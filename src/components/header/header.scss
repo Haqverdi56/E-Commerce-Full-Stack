@@ -58,6 +58,7 @@
                     display: block;
                     height: 100%;
                     border-bottom: 3px solid transparent;
+                    padding-bottom: 1rem;
                     &:hover {
                         color: $yellowHover;
                         border-bottom: 3px solid $yellowHover;
@@ -72,20 +73,22 @@
         .mega-menu {
             z-index: 999;
             position: absolute;
-            background-color: $yellow;
+            background-color: $gray;
             border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
             width: 100%;
             display: flex;
             gap: 1rem;
             padding: 2rem;
-            transition-duration: 0.3s;
-            transition-timing-function: ease-in-out;
-            .mega-menu li {
-                transition-duration: 0.2s;
-                transition-timing-function: ease-in-out;
+            .mega-menu-links {
+                font-weight: 500;
+                text-decoration: none;
+                color: $black;
+                font-size: 1.1rem;
+                &:hover {
+                    color: $yellow;
+                }
             }
-            
         }
     }
 }

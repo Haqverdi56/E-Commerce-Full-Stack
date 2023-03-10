@@ -1,32 +1,27 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function MegaMenu({handleMouseLeave}) {
+function MegaMenu({handleMouseLeave, categoryName}) {
+  // console.log(categoryName);
+  // console.log(test);
   return (
     <div className="mega-menu" onMouseLeave={handleMouseLeave}>
-      <div className="mega-menu__column">
-        <h3>Column 1</h3>
-        <ul>
-          <li><a href="#">Link 1</a></li>
-          <li><a href="#">Link 2</a></li>
-          <li><a href="#">Link 3</a></li>
-        </ul>
-      </div>
-      <div className="mega-menu__column">
-        <h3>Column 2</h3>
-        <ul>
-          <li><a href="#">Link 4</a></li>
-          <li><a href="#">Link 5</a></li>
-          <li><a href="#">Link 6</a></li>
-        </ul>
-      </div>
-      <div className="mega-menu__column">
-        <h3>Column 3</h3>
-        <ul>
-          <li><a href="#">Link 7</a></li>
-          <li><a href="#">Link 8</a></li>
-          <li><a href="#">Link 9</a></li>
-        </ul>
-      </div>
+      {
+        categoryName && categoryName.map((category,i) => (
+          <div key={i} className="mega-menu-column">
+            <Link to={`category/${category.name}`} className='mega-menu-links' onClick={handleMouseLeave}>
+              <h4>{category.name}</h4>
+            </Link>
+            {
+              category.children?.map((child,i) => (
+                <Link to={`category/${child.name}`} key={i} className='mega-menu-links' onClick={handleMouseLeave}>
+                  <p >{child.name}</p>
+                </Link>
+              ))
+            }
+          </div>
+        )) 
+      }
     </div>
   );
 }

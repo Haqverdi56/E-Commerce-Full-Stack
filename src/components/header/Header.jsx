@@ -54,10 +54,10 @@ function Header() {
             </div>
         </div>
         <div className='category-names' onMouseLeave={handleMouseLeave}>
-          <ul className='category-names-ul' onMouseEnter={handleMouseEnter}>
+          <ul className='category-names-ul'>
             {
               categoryName && categoryName.map((category, i) => (
-                <li key={i}>
+                <li key={i} onMouseEnter={handleMouseEnter}>
                   <NavLink to={`category/${category.name}`} className={({isActive}) => (isActive ? activeLink : "") }>
                     {category.name}
                   </NavLink>
@@ -65,7 +65,7 @@ function Header() {
               ))
             }
           </ul>
-          {showMegaMenu && <MegaMenu handleMouseLeave={handleMouseLeave} />}
+          {showMegaMenu && <MegaMenu handleMouseLeave={handleMouseLeave} categoryName={categoryName} />}
         </div>
     </div>
   )
