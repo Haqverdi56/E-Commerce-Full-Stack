@@ -7,16 +7,16 @@ import { Link } from 'react-router-dom';
 import { BsHeart } from 'react-icons/bs'
 import { BsHeartFill } from 'react-icons/bs'
 import { FiShoppingCart } from 'react-icons/fi';
-import toast, { Toaster } from 'react-hot-toast';
+
 
 function Product(props) {
   const [heart, setHeart] = useState(true);
   const dispatch = useDispatch();
-  const notify = () => toast.success('Product added to cart');
+  
 
   const addProduct = (item) => {
     dispatch(add(item));
-    notify()
+    props.clickToast()
   }
   
   const addFavorite = (itemFav) => {
@@ -44,24 +44,6 @@ function Product(props) {
             <button className='product-card-about-addButton' onClick={() => addProduct(props?.item)}>
               <FiShoppingCart />
               <p>Add</p>
-              <Toaster 
-              position="top-right"
-              reverseOrder={true}
-              gutter={8}
-              toastOptions={{
-                // Define default options
-                className: '',
-                duration: 2000,
-            
-                // Default options for specific types
-                success: {
-                  // duration: 1000,
-                  theme: {
-                    primary: 'green',
-                    secondary: 'black',
-                  },
-                },
-              }}/>
             </button>
         </div>
     </div>

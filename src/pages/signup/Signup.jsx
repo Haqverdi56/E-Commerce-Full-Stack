@@ -12,7 +12,7 @@ function Signup() {
   
   const handleLogin = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:5000/api/users/login`, data)
+    axios.post(`http://localhost:5000/api/users/register`, data)
     .then(response => console.log(response));
     navigate("/login")
   }
@@ -40,7 +40,7 @@ function Signup() {
             <label htmlFor="password">Password:</label>
             <input type="password" name="password" value={data.password} onChange={(e) => handleChange(e)} />
           </div>
-          <button type='submit' disabled={!data.email || !data.password ? true : false}>Registr</button>
+          <button type='submit' disabled={!data.email || !data.password ? true : false} className='submitButton'>Registr</button>
         </form>
       </div>
     </div>

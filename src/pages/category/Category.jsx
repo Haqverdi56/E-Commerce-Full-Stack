@@ -7,6 +7,7 @@ import AccordionCategory from '../../components/AccordionCategory'
 import Filter from './Filter'
 import SkeletonLoader from '../../components/Skeleton'
 import { Pagination } from '@mui/material'
+import toast, { Toaster } from 'react-hot-toast';
 
 const Category = () => {
   const [products, setProducts] = useState([]);
@@ -14,6 +15,7 @@ const Category = () => {
   const [skeleton, setSkeleton] = useState(true)
   // const [page, setPage] = useState(1)
   const params = useParams();
+  const notify = () => toast.success('Product added to cart');
   
   const fetchProducts = async () => {
     await axios.get(`http://localhost:5000/api/products?limit=90`)
@@ -44,6 +46,9 @@ const Category = () => {
   const changePagination = (e) => {
     console.log(e.target.textContent)
   }
+  const clickToast = () => {
+    notify()
+  }
   return (
     <>
     <div className='category-container'>
@@ -58,10 +63,24 @@ const Category = () => {
       <div className='categories-div'>
           {
             !skeleton ? filteredProducts.map(item => (
-              <Product key={item._id} item={item} />
+              <Product key={item._id} item={item} clickToast={clickToast} />
               )) : <SkeletonLoader />
             }
       </div>
+      <Toaster 
+          position="top-right"
+          reverseOrder={true}
+          gutter={8}
+          toastOptions={{
+            className: '',
+            duration: 2000,
+            success: {
+              theme: {
+                primary: 'green',
+                secondary: 'black',
+            },
+          },
+        }}/>
     </div>
       {/* <Pagination onChange={changePagination} count={filteredProducts.length} variant="outlined" /> */}
     </>

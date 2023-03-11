@@ -7,11 +7,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
 import "swiper/css";
 import './homepage.scss'
+import toast, { Toaster } from 'react-hot-toast';
 
 function HomePage() {
   const [data, setData] = useState([])
   const [laptops, setLaptops] = useState([])
   const [skeleton, setSkeleton] = useState(true)
+  const notify = () => toast.success('Product added to cart');
 
   const productFetch = async () => {
     await axios.get('http://localhost:5000/api/products?limit=10')
@@ -32,6 +34,10 @@ function HomePage() {
     productFetch();
     laptopFetch()
   }, [])
+
+  const clickToast = () => {
+    notify()
+  }
   
   return (
     <div className='homepage'>
@@ -68,7 +74,7 @@ function HomePage() {
             }}>
             {data && data.map((item, i) => (
             <SwiperSlide key={i}>
-              <Product item={item} />
+              <Product item={item} clickToast={clickToast} />
             </SwiperSlide>
           ))}
           </Swiper>
@@ -108,12 +114,26 @@ function HomePage() {
             }}>
             {laptops && laptops.map((item, i) => (
             <SwiperSlide key={i}>
-              <Product item={item} />
+              <Product item={item} clickToast={clickToast} />
             </SwiperSlide>
           ))}
           </Swiper>
           : <SkeletonLoader />
         }
+        <Toaster 
+          position="top-right"
+          reverseOrder={true}
+          gutter={8}
+          toastOptions={{
+            className: '',
+            duration: 2000,
+            success: {
+              theme: {
+                primary: 'green',
+                secondary: 'black',
+            },
+          },
+        }}/>
       </div>
     </div>
   )
