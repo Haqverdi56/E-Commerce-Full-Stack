@@ -24,9 +24,10 @@ function Header() {
 
 
   function handleMouseEnter() {
+    clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
       setShowMegaMenu(true);
-    }, 500);
+    }, 600);
   }
   
   function handleMouseLeave() {
@@ -58,7 +59,7 @@ function Header() {
             {
               categoryName && categoryName.map((category, i) => (
                 <li key={i} onMouseEnter={handleMouseEnter}>
-                  <NavLink to={`category/${category.name}`} className={({isActive}) => (isActive ? activeLink : "") }>
+                  <NavLink to={`category/${category.name}`} className={({isActive}) => (isActive ? activeLink : "")} onClick={handleMouseLeave}>
                     {category.name}
                   </NavLink>
                 </li>

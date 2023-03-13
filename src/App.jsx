@@ -10,12 +10,12 @@ import LoginPage from "./pages/loginpage/LoginPage"
 import ConfirmPage from "./pages/loginpage/ConfirmPage"
 import Signup from "./pages/signup/Signup"
 import { useEffect } from "react"
+import PrivateRoutes from "./utils/PrivateRoustes"
 
 function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log(token);
   }, []);
 
   return (
@@ -27,7 +27,9 @@ function App() {
           <Route path="/category/:name" element={<Category />} />
           <Route path="/basket" element={<Basket />} />
           <Route path="/details/:id" element={<Details />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route element={<PrivateRoutes/>}>
+            <Route path='/favorites' element={<Favorites/>}/>
+          </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/confirm" element={<ConfirmPage />} />

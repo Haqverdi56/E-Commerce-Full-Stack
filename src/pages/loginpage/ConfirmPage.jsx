@@ -12,8 +12,8 @@ function LoginPage() {
     axios.post('http://localhost:5000/api/users', confCode)
     .then(res => {
       console.log(res.data);
-      localStorage.setItem('token', res.data.token);
-      navigate("/")
+      // localStorage.setItem('token', res.data.token);
+      // navigate("/")
     })
   }
 

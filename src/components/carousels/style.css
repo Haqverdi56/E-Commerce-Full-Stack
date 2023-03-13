@@ -86,3 +86,9 @@
 .acc-category-name-checkbox:checked {
   background-color: red;
 }
+
+@media only screen and (min-width: 350px) and (max-width: 768px) {
+  .swiper-custom {
+    width: 100%;
+  }
+}

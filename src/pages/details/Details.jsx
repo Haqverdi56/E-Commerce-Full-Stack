@@ -7,11 +7,12 @@ import { add } from '../../redux/store/features/basketSlice'
 import { useDispatch } from 'react-redux'
 import { FiShoppingCart } from 'react-icons/fi'
 import Rating from '@mui/material/Rating';
-import Typography from '@mui/material/Typography';
+import Modal from '../../components/Modal'
 
 const Details = () => {
   const [dataItem, setDataItem] = useState({});
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = React.useState(0);
+  const [open, setOpen] = useState(false);
   const params = useParams();
   const dispatch = useDispatch()
   
@@ -19,14 +20,14 @@ const Details = () => {
     axios.get(`http://localhost:5000/api/products/${params.id}`)
     .then(res => setDataItem(res.data))
   }, [])
-  console.log(dataItem);
+  // console.log(dataItem);
 
   const addProduct = (item) => {
     dispatch(add(item));
   }
 
   return (
-    <div>
+    <div className='detail-page'>
       <div className='details-card'>
           <div className='details-card-img'>
             <SwiperCarousel dataItem={dataItem} />
@@ -41,7 +42,9 @@ const Details = () => {
                   onChange={(event, newValue) => {
                     setValue(newValue);
                   }}
+                  onClick={(e) => setOpen(true)}
                 />
+                <Modal open={open} setOpen={setOpen} />
               </div>
               <div>
                 <button className='details-card-about-addButton' onClick={() => addProduct(dataItem)}>
@@ -51,8 +54,19 @@ const Details = () => {
               </div>
           </div>
       </div>
-      <div className='details-product-about'>
-        <h3>Comments</h3>
+      <div className='product-comment'>
+        <div className='product-comment-section'>
+          <div className='rate-div'>
+            <p>5</p>
+            <div>
+              <Rating name="read-only" value={5} readOnly size="large"/>
+            </div>
+          </div>
+          <div className='user-comments'>
+            <p className='user-name'>Ecommerce User</p>
+            <p className='comment'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur inventore beatae doloribus explicabo totam? Facere culpa asperiores mollitia odio ratione iusto, cum adipisci quasi quia nam, excepturi possimus hic ipsum!</p>
+          </div>
+        </div>
       </div>
     </div>
   )
