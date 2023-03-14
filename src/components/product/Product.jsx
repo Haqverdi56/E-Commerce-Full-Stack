@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import './product.scss'
 import { add } from '../../redux/store/features/basketSlice';
 import { addFav } from '../../redux/store/features/favoritesSlice'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsHeart } from 'react-icons/bs'
 import { BsHeartFill } from 'react-icons/bs'
 import { FiShoppingCart } from 'react-icons/fi';
@@ -12,6 +12,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 function Product(props) {
   const [heart, setHeart] = useState(true);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   
 
   const addProduct = (item) => {
@@ -20,6 +21,9 @@ function Product(props) {
   }
   
   const addFavorite = (itemFav) => {
+    if(props.userData == null) {
+      navigate('/login')
+    } 
     setHeart(false);
     dispatch(addFav(itemFav))
   };

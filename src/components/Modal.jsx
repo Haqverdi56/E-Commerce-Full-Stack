@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import axios from 'axios';
 
 const style = {
   position: 'absolute',
@@ -16,10 +17,34 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({open, setOpen}) {
-  const handleOpen = () => setOpen(true);
+export default function BasicModal({open, setOpen, productId, userId}) {
   const handleClose = () => setOpen(false);
+  const [addComment, setAddComment] = useState({
+    rating: '',
+    comment: '',
+    productId: productId._id,
+    userId: userId?._id,
+  })
+  console.log(addComment)
 
+  const handleForm = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:5000/api/rating', addComment)
+    .then(res=> {
+      window.location.reload()
+    })
+    .catch(err => alert(err))
+  } 
+  
+  const handleComment = (e) => {
+    setAddComment({
+      ...addComment,
+      [e.target.name]: e.target.value,
+      productId: productId._id,
+      userId: userId?._id
+    })
+  }
+  
   return (
     <div>
       <Modal
@@ -29,16 +54,16 @@ export default function BasicModal({open, setOpen}) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <form action="">
+          <form onSubmit={handleForm}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
                 <p>Rate:</p>
-                <input type="number" min='0' max='5' placeholder='0' />
+                <input type="number" name='rating' min='0' max='5' placeholder='0' onChange={handleComment} />
             </Typography>
             <Typography variant='p' id="modal-modal-description" sx={{ mt: 2 }}>
                 <p>Comment:</p>
-                <input type="text" placeholder='Write your comments' />
+                <input type="text" name='comment' placeholder='Write your comments' onChange={handleComment}/>
             </Typography>
-            <button type='submit'>Add</button>
+            <button type='submit' >Add</button>
           </form>
         </Box>
       </Modal>

@@ -8,6 +8,6 @@ export const store = configureStore({
   reducer: {
     product: productReducer,
     category: categoryReducer,
-    favorite: favoriteReducer
+    favorite: favoriteReducer,
   },
 })

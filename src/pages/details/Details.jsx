@@ -1,7 +1,7 @@
 import axios from 'axios'
 import './details.scss'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import SwiperCarousel from '../../components/carousels/SwiperCarousel'
 import { add } from '../../redux/store/features/basketSlice'
 import { useDispatch } from 'react-redux'
@@ -9,23 +9,36 @@ import { FiShoppingCart } from 'react-icons/fi'
 import Rating from '@mui/material/Rating';
 import Modal from '../../components/Modal'
 
-const Details = () => {
+const Details = ({userData}) => {
   const [dataItem, setDataItem] = useState({});
   const [value, setValue] = React.useState(0);
+  const [comments, setComments] = useState([])
   const [open, setOpen] = useState(false);
   const params = useParams();
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   
   useEffect(() => {
     axios.get(`https://e-commerce-back-end-brendyol.vercel.app/api/products/${params.id}`)
     .then(res => setDataItem(res.data))
   }, [])
-  // console.log(dataItem);
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/rating')
+    .then(res => setComments(res.data))
+  }, [])
 
   const addProduct = (item) => {
     dispatch(add(item));
   }
-
+  const openModal = (item) => {
+    if(userData == null) {
+      navigate('/login')
+    }
+    setOpen(true)
+  }
+  // console.log(comments);
+  const productComments = comments.filter(comment => comment?.productId == dataItem._id)
   return (
     <div className='detail-page'>
       <div className='details-card'>
@@ -42,9 +55,9 @@ const Details = () => {
                   onChange={(event, newValue) => {
                     setValue(newValue);
                   }}
-                  onClick={(e) => setOpen(true)}
+                  onClick={openModal}
                 />
-                <Modal open={open} setOpen={setOpen} />
+                <Modal open={open} setOpen={setOpen} productId={dataItem} userId={userData}/>
               </div>
               <div>
                 <button className='details-card-about-addButton' onClick={() => addProduct(dataItem)}>
@@ -55,18 +68,22 @@ const Details = () => {
           </div>
       </div>
       <div className='product-comment'>
-        <div className='product-comment-section'>
-          <div className='rate-div'>
-            <p>5</p>
-            <div>
-              <Rating name="read-only" value={5} readOnly size="large"/>
+        {
+          comments && productComments.map(comment=> (
+            <div className='product-comment-section' key={comment._id}>
+              <div className='rate-div'>
+                <p>{comment.rating}</p>
+                <div>
+                  <Rating name="read-only" value={comment.rating} readOnly size="large"/>
+                </div>
+              </div>
+              <div className='user-comments'>
+                <p className='user-name'>{comment.userName}</p>
+                <p className='comment'>{comment.comment}</p>
+              </div>
             </div>
-          </div>
-          <div className='user-comments'>
-            <p className='user-name'>Ecommerce User</p>
-            <p className='comment'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur inventore beatae doloribus explicabo totam? Facere culpa asperiores mollitia odio ratione iusto, cum adipisci quasi quia nam, excepturi possimus hic ipsum!</p>
-          </div>
-        </div>
+          ))
+        }
       </div>
     </div>
   )

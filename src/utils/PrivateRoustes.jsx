@@ -11,7 +11,6 @@ const PrivateRoutes = () => {
         }
     });
 
-    // let auth = {'token':false}
     return(
         token ? <Outlet/> : <Navigate to="/login"/>
     )

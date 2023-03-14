@@ -6,15 +6,16 @@ import './signup.scss'
 function Signup() {
   const [data, setData] = useState({
     email: '',
-    password: ''
+    password: '',
+    userName:''
   });
   const [error, setError] = useState('')
   const navigate = useNavigate();
   
   const handleLogin = (e) => {
     e.preventDefault();
-    axios.post(`https://e-commerce-back-end-brendyol.vercel.app/api/users/register`, data)
-    .then(response => navigate("/login"))
+    axios.post(`http://localhost:5000/api/users/register`, data)
+    .then(response => navigate('/login'))
     .catch(err => {
       setError(err)
     })
@@ -29,7 +30,7 @@ function Signup() {
       [name]: value
     })
   }
-  
+  console.log(data);
   return (
     <div className='signup-container'>
       <div className='signup-container-inner'>
@@ -45,6 +46,10 @@ function Signup() {
           <div className='form-div'>
             <label htmlFor="password">Password:</label>
             <input type="password" name="password" value={data.password} onChange={(e) => handleChange(e)} />
+          </div>
+          <div className='form-div'>
+            <label htmlFor="userName">userName:</label>
+            <input type="text" name="userName" value={data.userName} onChange={(e) => handleChange(e)} />
           </div>
           <button type='submit' disabled={!data.email || !data.password ? true : false} className='submitButton'>Registr</button>
         </form>

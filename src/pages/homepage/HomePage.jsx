@@ -9,7 +9,7 @@ import "swiper/css";
 import './homepage.scss'
 import toast, { Toaster } from 'react-hot-toast';
 
-function HomePage() {
+function HomePage({userData}) {
   const [data, setData] = useState([])
   const [laptops, setLaptops] = useState([])
   const [skeleton, setSkeleton] = useState(true)
@@ -114,7 +114,7 @@ function HomePage() {
             }}>
             {laptops && laptops.map((item, i) => (
             <SwiperSlide key={i}>
-              <Product item={item} clickToast={clickToast} />
+              <Product item={item} clickToast={clickToast} userData={userData}/>
             </SwiperSlide>
           ))}
           </Swiper>

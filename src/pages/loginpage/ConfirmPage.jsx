@@ -15,7 +15,8 @@ function LoginPage() {
       document.cookie = `token=${res.data.token}`;
       const cookieUser = JSON.stringify(res.data.user)
       document.cookie = `user=${cookieUser}`;
-      navigate("/")
+      navigate("/");
+      window.location.reload()
     })
     .catch(err => console.log('errorr', err))
   }

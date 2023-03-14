@@ -5,23 +5,22 @@ import { VscAccount } from 'react-icons/vsc'
 import { TfiHeart } from 'react-icons/tfi'
 import { BsBasket } from 'react-icons/bs'
 import { Link, NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import MegaMenu from './MegaMenu'
 import Account from './Account'
 
 
-function Header() {
+function Header(props) {
   const [categoryName, setCategoryName] = useState([]);
   const [showMegaMenu, setShowMegaMenu] = useState(false);
   const products = useSelector(state => state.product);
   const timerRef = useRef();
-  
+
   useEffect(() => {
     axios.get('https://e-commerce-back-end-brendyol.vercel.app/api/categories')
     .then(res => setCategoryName(res.data))
   }, []);
-
 
   function handleMouseEnter() {
     clearTimeout(timerRef.current);
@@ -35,6 +34,11 @@ function Header() {
     setShowMegaMenu(false)
   }
   
+  function logout() {
+    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+    window.location.reload()
+  }
+  
   const activeLink = 'activeLink'
   return (
     <div className='header'>
@@ -43,7 +47,9 @@ function Header() {
                 <Link to='/'><img className='header-section-logo-img' src={Brendyol} alt="" /></Link>
             </div>
             <div className='header-section-icons'>
-                <Account />
+                {
+                  props.user == null ? <Account/> : <button onClick={logout}>Logout</button>
+                }
                 <Link className='icons' to='favorites'><TfiHeart/></Link>
                 <Link className='icons' to='basket'>
                   <BsBasket/>
