@@ -8,13 +8,16 @@ function Signup() {
     email: '',
     password: ''
   });
+  const [error, setError] = useState('')
   const navigate = useNavigate();
   
   const handleLogin = (e) => {
     e.preventDefault();
     axios.post(`http://localhost:5000/api/users/register`, data)
-    .then(response => console.log(response));
-    navigate("/login")
+    .then(response => navigate("/login"))
+    .catch(err => {
+      setError(err)
+    })
   }
 
   const handleChange = (e) => {
@@ -26,7 +29,7 @@ function Signup() {
       [name]: value
     })
   }
-
+  
   return (
     <div className='signup-container'>
       <div className='signup-container-inner'>
@@ -35,6 +38,9 @@ function Signup() {
           <div className='form-div'>
             <label htmlFor="email">E-mail Address:</label>
             <input type="text" name="email" value={data.email} onChange={(e) => handleChange(e)} />
+            {
+              error ? <p className='error'>Email already exists</p> : null
+            }
           </div>
           <div className='form-div'>
             <label htmlFor="password">Password:</label>

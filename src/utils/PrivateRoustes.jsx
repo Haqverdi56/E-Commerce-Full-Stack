@@ -1,9 +1,19 @@
 import { Outlet, Navigate } from 'react-router-dom'
 
 const PrivateRoutes = () => {
-    let auth = {'token':false}
+    const cookies = document.cookie.split('; ');
+    let token;
+
+    cookies?.forEach(cooki => {
+        const [name, value] = cooki.split('=');
+        if (name === 'token') {
+            token = value;
+        }
+    });
+
+    // let auth = {'token':false}
     return(
-        auth.token ? <Outlet/> : <Navigate to="/login"/>
+        token ? <Outlet/> : <Navigate to="/login"/>
     )
 }
 

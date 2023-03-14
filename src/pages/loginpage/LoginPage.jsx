@@ -8,6 +8,8 @@ function LoginPage() {
     email: '',
     password: ''
   });
+  const [error, setError] = useState('')
+
   const navigate = useNavigate();
   console.log(data);
   const handleLogin = (e) => {
@@ -16,7 +18,10 @@ function LoginPage() {
     .then(res => {
       setData(res.data)
       navigate("/confirm");
+    }) .catch(err => {
+      setError(err)
     })
+    
   }
 
   const handleChange = (e) => {
@@ -44,6 +49,9 @@ function LoginPage() {
           </div>
           <button type='submit' disabled={!data.email || !data.password ? true : false} className="submitButton">Sign in</button>
         </form>
+        {
+          error ? <p className='error'>User not found</p> : null
+        }
       </div>
     </div>
   );

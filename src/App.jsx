@@ -17,10 +17,22 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
   }, []);
+  
+  const cookies = document.cookie.split('; ');
+    let user;
+
+    cookies?.forEach(cooki => {
+        const [name, value] = cooki.split('=');
+        if (name === 'user') {
+            user = JSON.parse(value);
+        }
+    });
+    console.log(user);
 
   return (
     <div className="App">
       <Header />
+      {user? <p>Welcome {user?.email?.split('@')[0]}</p> : null}
       <div className="container">
         <Routes>
           <Route path="/" element={<HomePage />} />

@@ -12,9 +12,12 @@ function LoginPage() {
     axios.post('http://localhost:5000/api/users', confCode)
     .then(res => {
       console.log(res.data);
-      // localStorage.setItem('token', res.data.token);
-      // navigate("/")
+      document.cookie = `token=${res.data.token}`;
+      const cookieUser = JSON.stringify(res.data.user)
+      document.cookie = `user=${cookieUser}`;
+      navigate("/")
     })
+    .catch(err => console.log('errorr', err))
   }
 
   return (
