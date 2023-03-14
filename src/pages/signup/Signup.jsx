@@ -30,7 +30,7 @@ function Signup() {
       [name]: value
     })
   }
-  console.log(data);
+  
   return (
     <div className='signup-container'>
       <div className='signup-container-inner'>
@@ -48,10 +48,10 @@ function Signup() {
             <input type="password" name="password" value={data.password} onChange={(e) => handleChange(e)} />
           </div>
           <div className='form-div'>
-            <label htmlFor="userName">userName:</label>
+            <label htmlFor="userName">Username:</label>
             <input type="text" name="userName" value={data.userName} onChange={(e) => handleChange(e)} />
           </div>
-          <button type='submit' disabled={!data.email || !data.password ? true : false} className='submitButton'>Registr</button>
+          <button type='submit' disabled={!data.email || !data.password || !data.userName ? true : false} className='submitButton'>Registr</button>
         </form>
       </div>
     </div>

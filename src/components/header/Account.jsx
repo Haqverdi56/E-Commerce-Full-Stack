@@ -4,9 +4,10 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Fade from '@mui/material/Fade';
 import { VscAccount } from 'react-icons/vsc';
+import { FiLogOut } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-export default function FadeMenu() {
+export default function FadeMenu({user}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -15,6 +16,10 @@ export default function FadeMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  function logout() {
+    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+    window.location.reload()
+  }
 
   return (
     <div style={{width: '2.5rem'}}>
@@ -26,7 +31,11 @@ export default function FadeMenu() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <Link className='icons'><VscAccount/></Link>
+        <Link className='icons'>
+          {
+            user == null ? <VscAccount/> : <FiLogOut/>
+          }
+        </Link>
       </Button>
       <Menu
         id="fade-menu"
@@ -38,8 +47,14 @@ export default function FadeMenu() {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <MenuItem onClick={handleClose}><Link to='login'>Sign in</Link></MenuItem>
-        <MenuItem onClick={handleClose}><Link to='signup'>Sign up</Link></MenuItem>
+        {
+          user == null ? 
+          <div className='sign-buttons'>
+            <MenuItem onClick={handleClose}><Link to='login'>Sign in</Link></MenuItem>
+            <MenuItem onClick={handleClose}><Link to='signup'>Sign up</Link></MenuItem>
+          </div>
+          : <button className='logout-button' onClick={logout}>Logout</button>
+        }
       </Menu>
     </div>
   );

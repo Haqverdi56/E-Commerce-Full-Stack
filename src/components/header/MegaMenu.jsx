@@ -2,8 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function MegaMenu({handleMouseLeave, categoryName}) {
-  // console.log(categoryName);
-  // console.log(test);
   return (
     <div className="mega-menu" onMouseLeave={handleMouseLeave}>
       {

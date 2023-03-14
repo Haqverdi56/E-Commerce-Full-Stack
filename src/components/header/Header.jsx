@@ -34,11 +34,6 @@ function Header(props) {
     setShowMegaMenu(false)
   }
   
-  function logout() {
-    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
-    window.location.reload()
-  }
-  
   const activeLink = 'activeLink'
   return (
     <div className='header'>
@@ -48,7 +43,7 @@ function Header(props) {
             </div>
             <div className='header-section-icons'>
                 {
-                  props.user == null ? <Account/> : <button onClick={logout}>Logout</button>
+                  props.user == null ? <Account/> : <Account user={props.user}/>
                 }
                 <Link className='icons' to='favorites'><TfiHeart/></Link>
                 <Link className='icons' to='basket'>

@@ -12,8 +12,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const Category = () => {
   const [products, setProducts] = useState([]);
   const [selectedCategories, setSelectedCategories] = React.useState([]);
-  const [skeleton, setSkeleton] = useState(true)
-  // const [page, setPage] = useState(1)
+  const [skeleton, setSkeleton] = useState(true);
   const params = useParams();
   const notify = () => toast.success('Product added to cart');
   
@@ -28,8 +27,6 @@ const Category = () => {
     fetchProducts()
   }, [params.name]);
 
-  
-
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
     if (checked) {
@@ -43,9 +40,6 @@ const Category = () => {
    products.filter((product) => selectedCategories.includes(product.category[0].name)) 
    : products;
 
-  const changePagination = (e) => {
-    console.log(e.target.textContent)
-  }
   const clickToast = () => {
     notify()
   }
@@ -82,7 +76,6 @@ const Category = () => {
           },
         }}/>
     </div>
-      {/* <Pagination onChange={changePagination} count={filteredProducts.length} variant="outlined" /> */}
     </>
   )
 }

@@ -25,7 +25,6 @@ export default function BasicModal({open, setOpen, productId, userId}) {
     productId: productId._id,
     userId: userId?._id,
   })
-  console.log(addComment)
 
   const handleForm = (e) => {
     e.preventDefault();

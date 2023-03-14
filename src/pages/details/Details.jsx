@@ -37,7 +37,7 @@ const Details = ({userData}) => {
     }
     setOpen(true)
   }
-  // console.log(comments);
+  
   const productComments = comments.filter(comment => comment?.productId == dataItem._id)
   return (
     <div className='detail-page'>
