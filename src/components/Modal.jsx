@@ -29,7 +29,7 @@ export default function BasicModal({open, setOpen, productId, userId}) {
 
   const handleForm = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/rating', addComment)
+    axios.post('https://e-commerce-back-end-brendyol.vercel.app/api/rating', addComment)
     .then(res=> {
       window.location.reload()
     })

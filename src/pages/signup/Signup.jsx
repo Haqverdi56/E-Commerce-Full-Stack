@@ -14,7 +14,7 @@ function Signup() {
   
   const handleLogin = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:5000/api/users/register`, data)
+    axios.post(`https://e-commerce-back-end-brendyol.vercel.app/api/users/register`, data)
     .then(response => navigate('/login'))
     .catch(err => {
       setError(err)

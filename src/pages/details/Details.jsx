@@ -24,7 +24,7 @@ const Details = ({userData}) => {
   }, [])
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/rating')
+    axios.get('https://e-commerce-back-end-brendyol.vercel.app/api/rating')
     .then(res => setComments(res.data))
   }, [])
 
