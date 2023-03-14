@@ -67,6 +67,13 @@ const Details = ({userData}) => {
               </div>
           </div>
       </div>
+      <div>
+        {
+          dataItem && dataItem.tags?.map((tag,i) =>  (
+            <span key={i} style={{paddingLeft:'1rem', textTransform: 'uppercase'}}>{tag}</span>
+          ))
+        }
+      </div>
       <div className='product-comment'>
         {
           comments && productComments.map(comment=> (

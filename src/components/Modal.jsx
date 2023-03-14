@@ -61,7 +61,7 @@ export default function BasicModal({open, setOpen, productId, userId}) {
                 <p>Comment:</p>
                 <input type="text" name='comment' placeholder='Write your comments' onChange={handleComment}/>
             </Typography>
-            <button type='submit' >Add</button>
+            <button type='submit' disableda={!addComment.rating || !addComment.comment ? true : false} >Add</button>
           </form>
         </Box>
       </Modal>
