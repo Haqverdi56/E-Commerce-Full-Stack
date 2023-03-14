@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import axios from 'axios';
@@ -52,7 +51,7 @@ export default function BasicModal({open, setOpen, productId, userId}) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} className='form-modal'>
           <form onSubmit={handleForm}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
                 <p>Rate:</p>
