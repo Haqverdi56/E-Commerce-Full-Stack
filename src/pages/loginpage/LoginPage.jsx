@@ -14,7 +14,7 @@ function LoginPage() {
   console.log(data);
   const handleLogin = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/users/login', data)
+    axios.post('https://e-commerce-back-end-brendyol.vercel.app/api/users/login', data)
     .then(res => {
       setData(res.data)
       navigate("/confirm");

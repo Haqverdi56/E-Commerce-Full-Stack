@@ -17,7 +17,7 @@ const Details = () => {
   const dispatch = useDispatch()
   
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/products/${params.id}`)
+    axios.get(`https://e-commerce-back-end-brendyol.vercel.app/api/products/${params.id}`)
     .then(res => setDataItem(res.data))
   }, [])
   // console.log(dataItem);

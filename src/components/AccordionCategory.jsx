@@ -37,7 +37,7 @@ function AccordionCategory({selectedCategories,setSelectedCategories }) {
   // Accordion
   useEffect(() => {
     setSelectedCategories([params.name])
-    axios.get('http://localhost:5000/api/categories')
+    axios.get('https://e-commerce-back-end-brendyol.vercel.app/api/categories')
     .then(res => setCategoryName(res.data))
   }, [params.name]);
   

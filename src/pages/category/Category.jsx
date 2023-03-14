@@ -18,7 +18,7 @@ const Category = () => {
   const notify = () => toast.success('Product added to cart');
   
   const fetchProducts = async () => {
-    await axios.get(`http://localhost:5000/api/products?limit=90`)
+    await axios.get(`https://e-commerce-back-end-brendyol.vercel.app/api/products?limit=90`)
     .then(res => {
       setProducts(res.data)
       setSkeleton(false)

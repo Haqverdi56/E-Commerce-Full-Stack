@@ -9,7 +9,7 @@ function LoginPage() {
   
   const handleLogin = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/users', confCode)
+    axios.post('https://e-commerce-back-end-brendyol.vercel.app/api/users', confCode)
     .then(res => {
       console.log(res.data);
       document.cookie = `token=${res.data.token}`;

@@ -16,14 +16,14 @@ function HomePage() {
   const notify = () => toast.success('Product added to cart');
 
   const productFetch = async () => {
-    await axios.get('http://localhost:5000/api/products?limit=10')
+    await axios.get('https://e-commerce-back-end-brendyol.vercel.app/api/products?limit=10')
     .then(res => {
       setData(res.data);
       setSkeleton(false)
     })
   }
   const laptopFetch = async () => {
-    await axios.get('http://localhost:5000/api/products?limit=10&skip=10')
+    await axios.get('https://e-commerce-back-end-brendyol.vercel.app/api/products?limit=10&skip=10')
     .then(res => {
       setLaptops(res.data)  
       setSkeleton(false)

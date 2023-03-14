@@ -18,7 +18,7 @@ function Header() {
   const timerRef = useRef();
   
   useEffect(() => {
-    axios.get('http://localhost:5000/api/categories')
+    axios.get('https://e-commerce-back-end-brendyol.vercel.app/api/categories')
     .then(res => setCategoryName(res.data))
   }, []);
 
