@@ -6,6 +6,7 @@ import Category from './pages/category/Category'
 import Details from "./pages/details/Details"
 import Favorites from "./pages/Favorites/Favorites"
 import ErrorPage from "./pages/ErrorPage"
+import Footer from "./components/footer/Footer"
 import LoginPage from "./pages/loginpage/LoginPage"
 import ConfirmPage from "./pages/loginpage/ConfirmPage"
 import Signup from "./pages/signup/Signup"
@@ -50,6 +51,7 @@ function App() {
           <Route path="*" element={<ErrorPage/>} />
         </Routes>
       </div>
+      <Footer/>
     </div>
   )
 }

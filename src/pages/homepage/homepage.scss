@@ -8,4 +8,32 @@
             font-weight: 500;
         }
     }
+    .pano-div {
+        display: flex;
+        justify-content: space-between;
+        img {
+            max-width: 600px;
+        }
+    }
+}
+
+
+@media only screen and (min-width: 350px) and (max-width: 768px) {
+    .homepage {
+
+        .pano-div {
+            display: block;
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+    .pano-div {
+        img {
+            width: 300px;
+        }
+    }
 }

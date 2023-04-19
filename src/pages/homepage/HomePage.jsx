@@ -8,10 +8,13 @@ import { Autoplay } from "swiper";
 import "swiper/css";
 import './homepage.scss'
 import toast, { Toaster } from 'react-hot-toast';
+import PanoLeft from '../../assets/images/pano-1.svg'
+import PanoRight from '../../assets/images/pano-2.svg'
 
 function HomePage({userData}) {
   const [data, setData] = useState([])
   const [laptops, setLaptops] = useState([])
+  const [acc, setAcc] = useState([])
   const [skeleton, setSkeleton] = useState(true)
   const notify = () => toast.success('Product added to cart');
 
@@ -29,10 +32,18 @@ function HomePage({userData}) {
       setSkeleton(false)
     })
   }
+  const accFetch = async () => {
+    await axios.get('https://e-commerce-back-end-brendyol.vercel.app/api/products?limit=10&skip=15')
+    .then(res => {
+      setAcc(res.data)  
+      setSkeleton(false)
+    })
+  }
 
   useEffect(() => {
     productFetch();
     laptopFetch()
+    accFetch()
   }, [])
 
   const clickToast = () => {
@@ -113,6 +124,67 @@ function HomePage({userData}) {
               },
             }}>
             {laptops && laptops.map((item, i) => (
+            <SwiperSlide key={i}>
+              <Product item={item} clickToast={clickToast} userData={userData}/>
+            </SwiperSlide>
+          ))}
+          </Swiper>
+          : <SkeletonLoader />
+        }
+        <Toaster 
+          position="top-right"
+          reverseOrder={true}
+          gutter={8}
+          toastOptions={{
+            className: '',
+            duration: 2000,
+            success: {
+              theme: {
+                primary: 'green',
+                secondary: 'black',
+            },
+          },
+        }}/>
+      </div>
+      <div className='pano-div'>
+        <div>
+          <img src={PanoLeft} alt="" />
+        </div>
+        <div>
+          <img src={PanoRight} alt="" />
+        </div>
+      </div>
+      <div className="products">
+      <h3 className='products-slide-title'>New Accessories</h3>
+        {
+          !skeleton ?
+          <Swiper
+            slidesPerView={5}
+            spaceBetween={30}
+            autoplay={{
+              delay: 4500,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay]}
+            breakpoints={{
+              350: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 40,
+              },
+              1024: {
+                slidesPerView: 5,
+                spaceBetween: 50,
+              },
+            }}>
+            {acc && acc.map((item, i) => (
             <SwiperSlide key={i}>
               <Product item={item} clickToast={clickToast} userData={userData}/>
             </SwiperSlide>
