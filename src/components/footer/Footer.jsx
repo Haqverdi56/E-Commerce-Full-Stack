@@ -1,6 +1,6 @@
 import React from 'react'
 import './footer.scss'
-import Brendyol from '../../assets/images/brenyol-footer.png'
+import Brendyol from '../../assets/images/brendyol-footer.png'
 import { FaFacebookF } from 'react-icons/fa'
 import { AiFillInstagram, AiFillYoutube, AiOutlineTwitter } from 'react-icons/ai'
 
