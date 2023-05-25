@@ -1,6 +1,6 @@
 import React from 'react'
 import './footer.scss'
-// import Brendyol from '../../assets/images/brendyol-footer.png'
+import brendyolImage from '../../assets/images/brendyolfooter.png'
 import { FaFacebookF } from 'react-icons/fa'
 import { AiFillInstagram, AiFillYoutube, AiOutlineTwitter } from 'react-icons/ai'
 
@@ -9,7 +9,7 @@ function Footer() {
     <div className='footer'>
       <div className='footer-inner'>
         <div className='footer-logo-div'>
-          {/* <img src={Brendyol} alt="" /> */}
+          <img src={brendyolImage} alt="" />
           <div className='footer-icon-div'>
             <FaFacebookF/>
             <AiFillInstagram/>
