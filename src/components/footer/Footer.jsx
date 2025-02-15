@@ -36,8 +36,8 @@ function Footer() {
         <div className='footer-menu'>
           <h2>Əlaqə</h2>
           <div className="footer-categories">
-            <p>brendyolecommerce@gmail.com</p>
-            <p>*0001</p>
+            <p>qhaqverdi56@gmail.com</p>
+            {/* <p>*0001</p> */}
           </div>
         </div>
       </div>

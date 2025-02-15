@@ -101,3 +101,9 @@
         color: black
     }
 }
+
+@media only screen and (min-width: 350px) and (max-width: 768px) {
+    .hello-user{
+        display: none;
+    }
+}
